@@ -7,14 +7,12 @@ function isPrime(n) {
     if (n === 2 ) {
         return true;
     }
-    var i;
-    var s;
-    for (i=2, s = n**0.5; i<=s; i++)  {
+    for (var i=2; i<=(n**0.5); i++)  {
         if (n%i === 0) {
             return false;
         }
-    return true;
     }
+    return true;
 }
 
 function getNPrimes(n) {
@@ -22,25 +20,31 @@ function getNPrimes(n) {
     let valueToTest = 2;
     while (NPrimesList.length < n){
         if (isPrime(valueToTest)) {
-            NPrimesList.append(valueToTest);
+            NPrimesList.push(valueToTest);
         }
         valueToTest++;
-    }
+            }
     return NPrimesList;
 }
 
-function printNPrimes(n){
+function printNPrimes(n) {
     let listToPrint = getNPrimes(n);
-    let tableToPrint = '';
-    while (listToPrint.length > 0){
-        for (let x = 0; x < 5; x++){
-            tableToPrint += tableToPrint.pop(0);
-            tableToPrint += " ";
-        }
-        tableToPrint += "\n";
+    var result = "<table>";
+    let twidth = parseInt(listToPrint.length**0.5);
+       for(var i=0; i<listToPrint.length;) {
+        result += "<tr>";
+            for(var j=0; j<twidth; j++){
+                if (i<listToPrint.length){
+                    result += "<td>"+listToPrint[i]+"</td>";
+                }
+                i++
+            }
+                result += "</tr>";
     }
-    return tableToPrint;
+    result += "</table>";
+    return result;
 }
+
 function greetByName() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -67,22 +71,27 @@ function UsersPrime(){
     else {
         primeTest.innerHTML = `${number} is not a prime number`;
     }
-    // let primesTable = printNPrimes(number);
-    // primeTest.innerHTML = `${primesTable}`;
+    let tableArea = document.querySelector("table");
+    let primesTable = printNPrimes(number);
+    tableArea.innerHTML = `${primesTable}`;
 
 }
+
 function addParagraph() {
     let c = document.querySelector("#content");
     let p = document.createElement("p");
     c.append(p);
 }
-// function addTable(){
-//     let c = document.querySelector("#content");
-//     let t = document.createElement("table");
-//     c.append(t);
-// }
+
+function addTable() {
+    let c = document.querySelector("#content");
+    let t = document.createElement("table");
+    c.append(t);
+}
+
 window.onload = function() {
     addParagraph();
     this.greetByName();
+    addTable();
     this.UsersPrime();
 };
