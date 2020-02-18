@@ -31,13 +31,14 @@ function printNPrimes(n) {
     let listToPrint = getNPrimes(n);
     var result = "<table>";
     let twidth = parseInt(listToPrint.length**0.5);
+    result += "<thead><th colspan='100%'><b>"+"The first "+n+" prime numbers:"+"</b></th></thead>";
        for(var i=0; i<listToPrint.length;) {
         result += "<tr>";
             for(var j=0; j<twidth; j++){
                 if (i<listToPrint.length){
                     result += "<td>"+listToPrint[i]+"</td>";
                 }
-                i++
+                i++;
             }
                 result += "</tr>";
     }
