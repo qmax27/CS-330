@@ -6,6 +6,50 @@
     </head>
     
     <body>
+        <br>
+        <div>
+            
+            <table class ="mx-auto">
+
+            <tr>
+                <td  colspan="5"><input type="text" class="col" id="screen"></td>
+            </tr>
+            
+            <tr>
+                <td colspan="5"><button type="button" class="btn-block btn-danger border border-dark rounded" id="clear" onclick="addNewValue('clear')"><h1>C</h1></button></td>
+            </tr>
+
+            <tr>
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="1" onclick="addNewValue('1')"><h1>1</h1></button></td>
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="2" onclick="addNewValue('2')"><h1>2</h1></button></td>
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="3" onclick="addNewValue('3')"><h1>3</h1></button></td>
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="4" onclick="addNewValue('4')"><h1>4</h1></button></td>          
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="5" onclick="addNewValue('5')"><h1>5</h1></button></td>
+            </tr>
+
+            <tr>
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="6" onclick="addNewValue('6')"><h1>6</h1></button></td>
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="7" onclick="addNewValue('7')"><h1>7</h1></button></td>
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="8" onclick="addNewValue('8')"><h1>8</h1></button></td>
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="9" onclick="addNewValue('9')"><h1>9</h1></button></td>        
+                <td><button type="button" class="btn-lg btn-info col border border-dark rounded" id="0" onclick="addNewValue('0')"><h1>0</h1></button></td>
+            </tr>
+
+            <tr>
+                <td><button type="button" class="btn-lg btn-warning col border border-dark rounded" id="plus" onclick="addNewValue('+')"><h1>+</h1></button></td>
+                <td><button type="button" class="btn-lg btn-warning col border border-dark rounded" id="minus" onclick="addNewValue('-')"><h1>-</h1></button></td>
+                <td><button type="button" class="btn-lg btn-warning col border border-dark rounded" id="multiply" onclick="addNewValue('*')"><h1>*</h1></button></td>
+                <td><button type="button" class="btn-lg btn-warning col border border-dark rounded" id="divide" onclick="addNewValue('/')"><h1>/</h1></button></td>                                
+                <td><button type="button" class="btn-lg btn-secondary col border border-dark rounded" id="decimal" onclick="addNewValue('.')"><h1>.</h1></button></td>
+            </tr>
+
+            <tr>
+            <td colspan="5"><button type="button" class="btn-block btn-success border border-dark rounded" id="equal" onclick="solve()"><h1>=</h1></button></td>
+            </tr>
+
+        </table>
+
+        </div>
         <script src="js/jquery.js" crossorigin="anonymous"></script>
         <script src="js/popper.js" crossorigin="anonymous"></script>
         <script src="js/bootstrap.js" crossorigin="anonymous"></script>
