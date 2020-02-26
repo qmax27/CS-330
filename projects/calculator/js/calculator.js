@@ -4,12 +4,11 @@
 /* jshint jquery: true */
 'use strict';
 
-jQuery("screen").fitText(0.38);
-
 function addNewValue(val) 
 { 
     if (val == "clear") {
-        document.getElementById("screen").value= " " ;
+        document.getElementById("screen").value= "Clearing..." ;
+        setTimeout(function() { document.getElementById("screen").value= " ";},1000);
 
     }
     else {
