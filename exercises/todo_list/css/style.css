@@ -1,11 +1,16 @@
-.critical {
+.Critical {
+    background-color: orangered;
 }
 
-.important {
+.Important {
+    background-color: yellow;
 }
 
-.normal {
+.Normal {
+    background-color: lightblue;
 }
 
-.low {
+.Low {
+    background-color: lightgreen;
 }
+
