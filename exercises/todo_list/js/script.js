@@ -5,7 +5,6 @@
 var team = ["Aardvark", "Beaver", "Cheetah", "Dolphin", "Elephant", "Flamingo", "Giraffe", "Hippo"];
 var priority = ["Low", "Normal", "Important", "Critical"];
 
-
 function addTask() {
     if (!document.querySelector("#newTask").checkValidity()){
         let exists = document.querySelector("#warningMessage");
