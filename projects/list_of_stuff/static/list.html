@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Your Portfolio</title>
+</head>
+<body>
+    <h1 class="h1">Your Portfolio</h1>
+    <hr>
+    <h2 class="h2">New Stock</h2>
+    <form id="newStock" class="form-group">
+        <table>
+        <thead>
+            <th>Company</th><th>Industry</th><th>Number of Shares</th>
+        </thead>
+
+        <tr>
+            <td><input type="text" name="company" id="company" class="input-field" required></td>
+            <td><select name="industry" id="industry" class="btn dropdown-toggle"required></select></td>
+            <td><input type="number" min="1" id="shares" name="shares" required></td>
+        </tr>
+        <thead>
+            <th>Purchase Price</th><th>Current Price</th>
+        </thead>
+        <td>$<input type="number" min="0.01" step="0.01" id="purchase" name="purchase" required></td>
+        <td>$<input type="number" min="0.01" step="0.01" id="current" name="current" required></td>
+
+    </table>
+    <hr>
+    <button type="button" id="btnAdd" class="btn btn-block btn-primary" onclick="addStock()">Add Stock</button>
+    <hr>
+    </form>
+    <p id="errorSpace">
+    </p>
+    <table id="portfolio" class="table">
+        <thead>
+            <th></th>
+            <th>Company</th>
+            <th>Industry</th>
+            <th># of Shares</th>
+            <th>Purchase Price</th>
+            <th>Current Price</th>
+            <th>P/L</th>
+            <th>% Change</th>
+        </thead>
+        <tbody>
+            
+        </tbody>
+
+    </table>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="../js/model.js"></script>
+    <script src="../js/view.js"></script>
+    <script src="../js/controller.js"></script>
+
+</body>
+</html>
