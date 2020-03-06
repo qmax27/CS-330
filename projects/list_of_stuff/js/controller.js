@@ -21,7 +21,7 @@ window.onload = function() {
 };
 
 var myPortfolio = new Portfolio();
-var viewMyPortfolio = new PortfolioView();
+
 
 function addStock(){
     if(!document.querySelector("#newStock").checkValidity()){
@@ -45,11 +45,9 @@ function addStock(){
     
     var myNewStock = new Stock(company, industry, nShares, pPrice, cPrice);
 
-    
+    myPortfolio.add(myNewStock);
+    var viewMyPortfolio = new PortfolioView(myPortfolio);
 
-    viewMyPortfolio.add(myNewStock);
-
-    window.alert(viewMyPortfolio);
 
 }
 

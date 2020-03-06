@@ -10,7 +10,7 @@ class Stock {
         this._pPrice = pPrice;
         this._cPrice = cPrice;
         this._pl = cPrice-pPrice;
-        this._percentChange = (cPrice-pPrice)/(pPrice);
+        this._percentChange = ((cPrice-pPrice)/(pPrice))*100;
     }
 
     get company(){
@@ -41,10 +41,12 @@ class Stock {
 
 class Portfolio extends Stock {
     constructor(){
+        super();
         this._portfolio = [];
     }
     add(stock) {
         this._portfolio.push(stock);
+        this.publish("New stock added", this);
     }
     [Symbol.iterator]() {
         let idx = -1;

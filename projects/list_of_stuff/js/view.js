@@ -11,7 +11,7 @@ class PortfolioView {
     redrawList(listOfStocks, msg){
         let tblBody = document.querySelector("#portfolio > tbody");
         tblBody.innerHTML = "";
-        
+
         for (let stock of listOfStocks){
             let change = stock.pl;
             let tradeType = "neutral";
@@ -53,6 +53,8 @@ class PortfolioView {
             let tdChange = document.createElement("td");
             tdChange.innerHTML = stock.percentChange;
             row.appendChild(tdChange);
+
+            window.alert("this is the row" +row);
 
 
 
