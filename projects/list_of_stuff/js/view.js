@@ -4,12 +4,16 @@
 'use strict';
 
 class PortfolioView {
+    
     constructor(model) {
-        model.subscribe(this.redrawList.bind(this));
+        this.model = model;
+        // model.subscribe(this.redrawList.bind(this));
     }
-
-    redrawList(listOfStocks, msg){
+    
+    redrawList(listOfStocks){
+        // window.alert("redrawList got called");
         let tblBody = document.querySelector("#portfolio > tbody");
+        
         tblBody.innerHTML = "";
 
         for (let stock of listOfStocks){
@@ -22,9 +26,12 @@ class PortfolioView {
             else if (change < 0){
                 tradeType = "bad";
             }
-
             let row = document.createElement("tr");
             row.setAttribute("class", tradeType);
+            let tdCheck = document.createElement("td");
+            tdCheck.innerHTML = '<input type="checkbox"  id="elimButton">';
+            row.appendChild(tdCheck);
+            
 
             let tdCompany = document.createElement("td");
             tdCompany.innerHTML = stock.company;
@@ -39,22 +46,25 @@ class PortfolioView {
             row.appendChild(tdnShares);
 
             let tdpPrice = document.createElement("td");
-            tdpPrice.innerHTML = stock.pPrice;
+            tdpPrice.innerHTML = '$'+stock.pPrice;
             row.appendChild(tdpPrice);
 
             let tdcPrice = document.createElement("td");
-            tdcPrice.innerHTML = stock.cPrice;
+            tdcPrice.innerHTML = '$'+stock.cPrice;
             row.appendChild(tdcPrice);
 
             let tdPL = document.createElement("td");
-            tdPL.innerHTML = stock.pl;
+            tdPL.innerHTML = '$'+stock.pl;
             row.appendChild(tdPL);
 
             let tdChange = document.createElement("td");
-            tdChange.innerHTML = stock.percentChange;
+            tdChange.innerHTML = stock.percentChange+' %';
             row.appendChild(tdChange);
+            let tableToAppend = document.querySelector("#portfolioBody");
+            tableToAppend.appendChild(row);
 
-            window.alert("this is the row" +row);
+
+            // window.alert("this is the row" +row);
 
 
 

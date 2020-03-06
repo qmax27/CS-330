@@ -4,7 +4,7 @@
 
 'use strict';
 
-var industryList = ["Consumer Goods","Energy","Financials","Health Care", "Industrials", "IT", "Materials", "Real Estate", "Telecom", "Utilities"];
+var industryList = ["Consumer Goods","Energy","Financials","Health Care", "Industrials", "IT", "Materials", "Real Estate", "Telecom", "Utilities", "Other"];
 
 function populateSelectOption(selectId, optionArray) {
     let menu = document.querySelector(selectId);
@@ -21,7 +21,6 @@ window.onload = function() {
 };
 
 var myPortfolio = new Portfolio();
-
 
 function addStock(){
     if(!document.querySelector("#newStock").checkValidity()){
@@ -45,8 +44,16 @@ function addStock(){
     
     var myNewStock = new Stock(company, industry, nShares, pPrice, cPrice);
 
+    // window.alert("1");
+
     myPortfolio.add(myNewStock);
+
+    // window.alert("2");
     var viewMyPortfolio = new PortfolioView(myPortfolio);
+
+    viewMyPortfolio.redrawList(myPortfolio);
+
+    // window.alert("3");
 
 
 }

@@ -45,8 +45,10 @@ class Portfolio extends Stock {
         this._portfolio = [];
     }
     add(stock) {
+        // window.alert("add called")
         this._portfolio.push(stock);
-        this.publish("New stock added", this);
+        // window.alert("stock pushed");
+        // this.publish("New stock added", this);
     }
     [Symbol.iterator]() {
         let idx = -1;
