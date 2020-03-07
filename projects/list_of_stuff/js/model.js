@@ -9,7 +9,9 @@ class Stock {
         this._nShares = nShares;
         this._pPrice = pPrice;
         this._cPrice = cPrice;
-        this._pl = cPrice-pPrice;
+        this._startingEquity = pPrice*nShares;
+        this._currentEquity = cPrice*nShares;
+        this._pl = this._currentEquity-this._startingEquity;
         this._percentChange = ((cPrice-pPrice)/(pPrice))*100;
     }
 
@@ -29,7 +31,14 @@ class Stock {
     }
     get cPrice(){
         return this._cPrice;
+    }   
+    get startingEquity(){
+        return this._startingEquity;
     }
+    get currentEquity(){
+        return this._currentEquity;
+    }
+
     get pl(){
         return this._pl;
     }

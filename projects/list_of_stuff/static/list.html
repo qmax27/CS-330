@@ -43,14 +43,33 @@
             <th># of Shares</th>
             <th>Purchase Price</th>
             <th>Current Price</th>
+            <th>Starting Equity</th>
+            <th>Current Equity</th>
             <th>P/L</th>
             <th>% Change</th>
         </thead>
         <tbody id="portfolioBody">
 
         </tbody>
+        <tfoot class="footer">
+            <th>TOTALS:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th id="SE"></th>
+            <th id="CE"></th>
+            <th id="PL"></th>
+            <th id="PER"></th>
+
+        </tfoot>
+
 
     </table>
+    <input type="button" value="Save Portfolio" id="save" class="btn btn-success" onclick="SavePortfolio()">
+    <input type="button" value="Remove Selected Stocks" id="rmSel" class="btn btn-warning" onclick="RemoveSelected()">
+    <input type="button" value="Remove ALL" id="rmAll" class="btn btn-danger" onclick="RemoveAll()">
     
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

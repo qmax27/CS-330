@@ -13,6 +13,12 @@ class PortfolioView {
     redrawList(listOfStocks){
         // window.alert("redrawList got called");
         let tblBody = document.querySelector("#portfolio > tbody");
+        let sEqTotal = 0;
+        let cEqTotal = 0;
+        let plTotal = 0;
+        let perChangeTotal = 0;
+
+
         
         tblBody.innerHTML = "";
 
@@ -53,13 +59,25 @@ class PortfolioView {
             tdcPrice.innerHTML = '$'+stock.cPrice;
             row.appendChild(tdcPrice);
 
+            let tdpEq = document.createElement("td");
+            sEqTotal +=stock.startingEquity;
+            tdpEq.innerHTML = '$'+stock.startingEquity;
+            row.appendChild(tdpEq);
+
+            let tdcEq = document.createElement("td");
+            cEqTotal +=stock.currentEquity;
+            tdcEq.innerHTML = '$'+stock.currentEquity;
+            row.appendChild(tdcEq);
+
             let tdPL = document.createElement("td");
+            plTotal += stock.pl;
             tdPL.innerHTML = '$'+stock.pl;
             row.appendChild(tdPL);
 
             let tdChange = document.createElement("td");
             tdChange.innerHTML = stock.percentChange+' %';
             row.appendChild(tdChange);
+
             let tableToAppend = document.querySelector("#portfolioBody");
             tableToAppend.appendChild(row);
 
@@ -69,6 +87,23 @@ class PortfolioView {
 
 
         }
+        let SE = document.querySelector("#SE");
+        window.alert(sEqTotal);
+        SE.innerHTML = "$"+sEqTotal;
+
+        let CE = document.querySelector("#CE");
+        window.alert(cEqTotal);
+
+        CE.innerHTML = "$"+cEqTotal;
+
+        let PL = document.querySelector("#PL");
+        window.alert(plTotal);
+        CE.innerHTML = "$"+plTotal;
+
+        let PER = document.querySelector("#PER");
+        perChangeTotal = (100*plTotal/(sEqTotal))+"%";
+        window.alert(perChangeTotal);
+        CE.innerHTML = perChangeTotal;
     }
 }
 // this._company = company;
