@@ -17,10 +17,18 @@ function populateSelectOption(selectId, optionArray) {
 }
 
 window.onload = function() {
+
     populateSelectOption("#industry", this.industryList);
+    // loadPortfolio();
 };
 
+// let portfolio = (localStorage.getItem("portfolio"));
+
+
 var myPortfolio = new Portfolio();
+
+// let viewMyPortfolio = new PortfolioView(portfolio);
+// viewMyPortfolio.redrawList(myPortfolio);
 
 function addStock(){
     if(!document.querySelector("#newStock").checkValidity()){
@@ -44,17 +52,63 @@ function addStock(){
     
     var myNewStock = new Stock(company, industry, nShares, pPrice, cPrice);
 
-    // window.alert("1");
-
     myPortfolio.add(myNewStock);
 
-    // window.alert("2");
     var viewMyPortfolio = new PortfolioView(myPortfolio);
 
     viewMyPortfolio.redrawList(myPortfolio);
-
-    // window.alert("3");
-
-
 }
 
+function getUniqueID() {
+    let ID = 0;
+    let exists = document.getElementById(ID);
+    while (exists) {
+        ID +=1;
+        exists = document.getElementById(ID);
+    }
+    return ID;    
+}
+
+function checked() {
+    window.alert("checked got called");
+    let ID = 0;
+    let row = document.getElementById(ID);
+    window.alert(row);
+    let button = document.getElementById(("b"+ID));
+    if (button.checked) 
+    {
+        row.style.textDecoration = "line-through";
+    } else {
+        row.style.textDecoration = 'none';
+    }
+  }
+
+function savePortfolio() {
+    if(window.confirm("Are you sure you want to save your portfolio?")){
+
+        localStorage.setItem("portfolio", myPortfolio);
+
+    }
+}
+   
+
+
+function removeSelected() {
+    if(window.confirm("Are you sure you want to remove selected stocks?")){
+
+    }
+  
+}
+
+function removeAll() {
+    if(window.confirm("Are you sure you want to remove all?")){
+        localStorage.removeItem("portfolio");
+        myPortfolio = new Portfolio();
+        let viewMyPortfolio = new PortfolioView(myPortfolio);
+        viewMyPortfolio.redrawList(myPortfolio);
+    }
+}
+
+function loadPortfolio() {
+
+}

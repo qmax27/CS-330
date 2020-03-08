@@ -34,8 +34,11 @@ class PortfolioView {
             }
             let row = document.createElement("tr");
             row.setAttribute("class", tradeType);
+            let uniqueID = getUniqueID();
+            row.setAttribute("id", uniqueID);
             let tdCheck = document.createElement("td");
-            tdCheck.innerHTML = '<input type="checkbox"  id="elimButton">';
+            // let onclick = `checked()`;
+            tdCheck.innerHTML = '<input type="checkbox" onclick = checked()>';
             row.appendChild(tdCheck);
             
 
@@ -61,51 +64,43 @@ class PortfolioView {
 
             let tdpEq = document.createElement("td");
             sEqTotal +=stock.startingEquity;
-            tdpEq.innerHTML = '$'+stock.startingEquity;
+            tdpEq.innerHTML = '$'+(stock.startingEquity).toFixed(2);
             row.appendChild(tdpEq);
 
             let tdcEq = document.createElement("td");
             cEqTotal +=stock.currentEquity;
-            tdcEq.innerHTML = '$'+stock.currentEquity;
+            tdcEq.innerHTML = '$'+(stock.currentEquity).toFixed(2);
             row.appendChild(tdcEq);
 
             let tdPL = document.createElement("td");
             plTotal += stock.pl;
-            tdPL.innerHTML = '$'+stock.pl;
+            tdPL.innerHTML = '$'+(stock.pl).toFixed(2);
             row.appendChild(tdPL);
 
             let tdChange = document.createElement("td");
-            tdChange.innerHTML = stock.percentChange+' %';
+            tdChange.innerHTML = (stock.percentChange).toFixed(2)+'%';
             row.appendChild(tdChange);
 
             let tableToAppend = document.querySelector("#portfolioBody");
             tableToAppend.appendChild(row);
-
-
-            // window.alert("this is the row" +row);
-
-
-
         }
         let SE = document.querySelector("#SE");
-        window.alert(sEqTotal);
-        SE.innerHTML = "$"+sEqTotal;
+        SE.innerHTML = "$"+sEqTotal.toFixed(2);
 
         let CE = document.querySelector("#CE");
-        window.alert(cEqTotal);
-
-        CE.innerHTML = "$"+cEqTotal;
+        CE.innerHTML = "$"+cEqTotal.toFixed(2);
 
         let PL = document.querySelector("#PL");
-        window.alert(plTotal);
-        CE.innerHTML = "$"+plTotal;
+        let roundedplTotal = plTotal.toFixed(2);
+        PL.innerHTML = "$"+roundedplTotal;
 
         let PER = document.querySelector("#PER");
-        perChangeTotal = (100*plTotal/(sEqTotal))+"%";
-        window.alert(perChangeTotal);
-        CE.innerHTML = perChangeTotal;
+        perChangeTotal = (100*plTotal/(sEqTotal)).toFixed(2)+"%";
+        PER.innerHTML = perChangeTotal;
     }
 }
+
+
 // this._company = company;
 // this._industry = industry;
 // this._nShares = nShares;

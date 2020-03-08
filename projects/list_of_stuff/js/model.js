@@ -9,10 +9,10 @@ class Stock {
         this._nShares = nShares;
         this._pPrice = pPrice;
         this._cPrice = cPrice;
-        this._startingEquity = pPrice*nShares;
-        this._currentEquity = cPrice*nShares;
-        this._pl = this._currentEquity-this._startingEquity;
-        this._percentChange = ((cPrice-pPrice)/(pPrice))*100;
+        this._startingEquity = (pPrice*nShares);
+        this._currentEquity = (cPrice*nShares);
+        this._pl = (this._currentEquity-this._startingEquity);
+        this._percentChange = (((cPrice-pPrice)/(pPrice))*100);
     }
 
     get company(){
@@ -58,6 +58,9 @@ class Portfolio extends Stock {
         this._portfolio.push(stock);
         // window.alert("stock pushed");
         // this.publish("New stock added", this);
+    }
+    view(){
+        return this._portfolio;
     }
     [Symbol.iterator]() {
         let idx = -1;
