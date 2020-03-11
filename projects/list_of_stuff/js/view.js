@@ -18,8 +18,6 @@ class PortfolioView {
         let plTotal = 0;
         let perChangeTotal = 0;
 
-
-        
         tblBody.innerHTML = "";
         
         for (let stock of listOfStocks){

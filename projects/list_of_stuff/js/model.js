@@ -2,7 +2,6 @@
 /* jshint node: true */
 /*jshint jquery: true */
 /* jshint browser: true */
-
 'use strict';
 
 class Stock {

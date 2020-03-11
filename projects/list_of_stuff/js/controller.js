@@ -20,7 +20,6 @@ function populateSelectOption(selectId, optionArray) {
 //Global variable declared when the window loads, based on what is inside local storage when the page loads.
 var myPortfolio = loadPortfolio();
 
-
 function addStock(){
     if(!document.querySelector("#newStock").checkValidity()){
         let exists = document.querySelector("#warningMessage");
@@ -48,6 +47,8 @@ function addStock(){
     var viewMyPortfolio = new PortfolioView(myPortfolio);
 
     viewMyPortfolio.redrawList(myPortfolio);
+    let exists = document.querySelector("#warningMessage");
+    exists.remove();
 }
 
 function getUniqueID() {
@@ -79,7 +80,7 @@ function savePortfolio() {
 }
 
 function removeSelected() {
-    if(window.confirm("Are you sure you want to remove selected stocks?")){
+    if(window.confirm("Are you sure you want to remove selected stocks? This will not change your saved portfolio, but will change your active portfolio.")){
         let table = document.querySelector("#portfolio");
         var checkedRows = [];
         for (var i = 0; i < document.getElementsByClassName("checkbox_check").length; i++){
@@ -99,7 +100,7 @@ function removeSelected() {
 }
 
 function removeAll() {
-    if(window.confirm("Are you sure you want to remove all?")){
+    if(window.confirm("Are you sure you want to remove all? This will also clear your saved portfolio.")){
         localStorage.removeItem("portfolio");
         myPortfolio = new Portfolio();
         let viewMyPortfolio = new PortfolioView(myPortfolio);
@@ -131,7 +132,6 @@ function loadPortfolio() {
     var viewMyPortfolio = new PortfolioView(myPortfolio);
     viewMyPortfolio.redrawList(myPortfolio);
     return myPortfolio;
-
 }
 
 window.onload = function() {
