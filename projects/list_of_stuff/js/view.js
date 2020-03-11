@@ -22,9 +22,11 @@ class PortfolioView {
 
         
         tblBody.innerHTML = "";
-
+        // window.alert(listOfStocks);
         for (let stock of listOfStocks){
+            // window.alert(stock);
             let change = stock.pl;
+            // window.alert(change);
             let tradeType = "neutral";
 
             if (change > 0){
@@ -45,6 +47,7 @@ class PortfolioView {
 
             let tdCompany = document.createElement("td");
             tdCompany.innerHTML = stock.company;
+            // window.alert(stock.company);
             row.appendChild(tdCompany);
 
             let tdIndustry = document.createElement("td");

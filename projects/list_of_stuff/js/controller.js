@@ -17,15 +17,7 @@ function populateSelectOption(selectId, optionArray) {
     }
 }
 
-
-
-// let portfolio = (localStorage.getItem("portfolio"));
-
-
 var myPortfolio = new Portfolio();
-
-// let viewMyPortfolio = new PortfolioView(portfolio);
-// viewMyPortfolio.redrawList(myPortfolio);
 
 function addStock(){
     if(!document.querySelector("#newStock").checkValidity()){
@@ -66,26 +58,12 @@ function getUniqueID() {
     return ID;    
 }
 
-// function checked() {
-//     // $("#ToDoTable input[type='checkbox']:checked").closest("tr").style.textDecoration = "line-through";
-//     // window.alert("checked got called");
-//     let row = document.getElementById(ID);
-//     window.alert(row);
-//     let button = document.getElementById(("b"+ID));
-//     window.alert(button);
-//     if (button.checked) 
-//     {
-//         row.style.textDecoration = "line-through";
-//     } else {
-//         row.style.textDecoration = 'none';
-//     }
-//   }
+
 
 function savePortfolio() {
-    // if(window.confirm("Are you sure you want to save your portfolio?")){
-        // if(true){
-        //     removeAll();
-        // }
+    if(window.confirm("Are you sure you want to save your portfolio?")){
+
+
         let portfolio = localStorage.getItem("portfolio");
         portfolio = portfolio ? JSON.parse(portfolio) : [];
         for (let stocks of myPortfolio) {
@@ -95,24 +73,18 @@ function savePortfolio() {
 
         localStorage.setItem("portfolio",JSON.stringify(portfolio));
 
-    // }
+    }
 }
-
 
 function removeSelected() {
     if(window.confirm("Are you sure you want to remove selected stocks?")){
         let table = document.querySelector("#portfolio");
-        // window.alert(table);
-        var tbodyRowCount = table.tBodies[0].rows.length;
-        // window.alert(tbodyRowCount);
-
         var checkedRows = [];
         for (var i = 0; i < document.getElementsByClassName("checkbox_check").length; i++){
             if(document.getElementsByClassName("checkbox_check")[i].checked) {
                 checkedRows.push(i);
             }
         }
-        window.alert(checkedRows);
         let count = 0;
         for (let s of checkedRows){
             s = s - count;
@@ -121,57 +93,42 @@ function removeSelected() {
         }
         var viewMyPortfolio = new PortfolioView(myPortfolio);
         viewMyPortfolio.redrawList(myPortfolio);
-
-        
-        // for (var i = 0; i < tbodyRowCount; i++){
-            
-        //     // window.alert("row:"+i);
-
-        //     if (($('input.checkbox_check').is(':checked'))) {
-        //         $("#portfolio input[type='checkbox']:checked").closest("tr").remove();
-        //         let item = $('.checkbox_check').index(this);
-        //         window.alert(item);
-        //         myPortfolio.remove(item);
-        //     }
-        // }
     }
 }
 
-
-
 function removeAll() {
-    // if(window.confirm("Are you sure you want to remove all?")){
+    if(window.confirm("Are you sure you want to remove all?")){
         localStorage.removeItem("portfolio");
         myPortfolio = new Portfolio();
         let viewMyPortfolio = new PortfolioView(myPortfolio);
         viewMyPortfolio.redrawList(myPortfolio);
-    // }
+    }
 }
 
-
 function loadPortfolio() {
-    if (!localStorage){
+    let portfolio = JSON.parse(localStorage.getItem("portfolio"));
+    var myPortfolio = new Portfolio();
+    if (!portfolio){
         return;
     }
 
-    var myPortfolio = new Portfolio();
-
-    for (var i = 0; i < localStorage.length; i++){
-        // window.alert(i);
-        let stock = localStorage.getItem(localStorage.key(i));
-        // window.alert(stock);
-        myPortfolio.add((localStorage.getItem(localStorage.key(i))));
+    for (let stock of portfolio) {
+        let stockString = JSON.stringify(stock);
+        let company = stockString.split('"_company":"')[1].split('",')[0];
+        let industry = stockString.split('"_industry":"')[1].split('",')[0];
+        let nShares = stockString.split('"_nShares":"')[1].split('",')[0];
+        let pPrice = stockString.split('"_pPrice":"')[1].split('",')[0];
+        let cPrice = stockString.split('"_cPrice":"')[1].split('",')[0];
+        var myNewStock = new Stock(company, industry, nShares, pPrice, cPrice);
+        
+        myPortfolio.add(myNewStock);
     }
-    // window.alert(myPortfolio);
 
-    // for (var stock of stocks) {
-    //     stock = JSON.parse(stock);
-    //     window.alert(stock);
-    //     myPortfolio.add(stock);
-    // }
-    let viewMyPortfolio = new PortfolioView(myPortfolio);
+    var viewMyPortfolio = new PortfolioView(myPortfolio);
     viewMyPortfolio.redrawList(myPortfolio);
+
 }
+
 window.onload = function() {
 
     populateSelectOption("#industry", this.industryList);
