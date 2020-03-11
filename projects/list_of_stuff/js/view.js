@@ -8,11 +8,10 @@ class PortfolioView {
     
     constructor(model) {
         this.model = model;
-        // model.subscribe(this.redrawList.bind(this));
     }
     
     redrawList(listOfStocks){
-        // window.alert("redrawList got called");
+        
         let tblBody = document.querySelector("#portfolio > tbody");
         let sEqTotal = 0;
         let cEqTotal = 0;
@@ -22,11 +21,9 @@ class PortfolioView {
 
         
         tblBody.innerHTML = "";
-        // window.alert(listOfStocks);
+        
         for (let stock of listOfStocks){
-            // window.alert(stock);
             let change = stock.pl;
-            // window.alert(change);
             let tradeType = "neutral";
 
             if (change > 0){
@@ -47,7 +44,6 @@ class PortfolioView {
 
             let tdCompany = document.createElement("td");
             tdCompany.innerHTML = stock.company;
-            // window.alert(stock.company);
             row.appendChild(tdCompany);
 
             let tdIndustry = document.createElement("td");
@@ -104,11 +100,3 @@ class PortfolioView {
     }
 }
 
-
-// this._company = company;
-// this._industry = industry;
-// this._nShares = nShares;
-// this._pPrice = pPrice;
-// this._cPrice = cPrice;
-// this._pl = cPrice-pPrice;
-// this._percentChange = (_pl)/(_pPrice);

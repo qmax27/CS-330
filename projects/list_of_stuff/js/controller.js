@@ -17,7 +17,9 @@ function populateSelectOption(selectId, optionArray) {
     }
 }
 
-var myPortfolio = new Portfolio();
+//Global variable declared when the window loads, based on what is inside local storage when the page loads.
+var myPortfolio = loadPortfolio();
+
 
 function addStock(){
     if(!document.querySelector("#newStock").checkValidity()){
@@ -62,17 +64,17 @@ function getUniqueID() {
 
 function savePortfolio() {
     if(window.confirm("Are you sure you want to save your portfolio?")){
-
-
-        let portfolio = localStorage.getItem("portfolio");
-        portfolio = portfolio ? JSON.parse(portfolio) : [];
-        for (let stocks of myPortfolio) {
-            // window.alert(stocks);
-            portfolio.push(stocks);
-        }
-
-        localStorage.setItem("portfolio",JSON.stringify(portfolio));
-
+        //localStorage.setItem was appending instead of overwriting, so I had to remove the existing data before adding new data
+        localStorage.removeItem("portfolio");
+        //I had to use the setTimeout to delay when it tries to put in the new data. If I didn't use setTimeout, the data wouldn't save at all.
+        setTimeout(function() {
+            let portfolio = localStorage.getItem("portfolio");
+            portfolio = portfolio ? JSON.parse(portfolio) : [];
+            for (let stocks of myPortfolio) {
+                portfolio.push(stocks);
+            }
+            localStorage.setItem("portfolio",JSON.stringify(portfolio));
+        },500);
     }
 }
 
@@ -109,9 +111,11 @@ function loadPortfolio() {
     let portfolio = JSON.parse(localStorage.getItem("portfolio"));
     var myPortfolio = new Portfolio();
     if (!portfolio){
-        return;
+        return myPortfolio;
     }
 
+    //When I tried to get individual stocks out of the loaded portfolio, it would come back undefined. 
+    //Manually splitting the stringified data was the only way I could get it extracted and put into a new portfolio
     for (let stock of portfolio) {
         let stockString = JSON.stringify(stock);
         let company = stockString.split('"_company":"')[1].split('",')[0];
@@ -126,12 +130,13 @@ function loadPortfolio() {
 
     var viewMyPortfolio = new PortfolioView(myPortfolio);
     viewMyPortfolio.redrawList(myPortfolio);
+    return myPortfolio;
 
 }
 
 window.onload = function() {
 
     populateSelectOption("#industry", this.industryList);
-    loadPortfolio();
+    //I wanted to declare myPortfolio as a global variable, so it loads outside of the onload function.
     
 };

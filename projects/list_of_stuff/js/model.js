@@ -57,13 +57,11 @@ class Portfolio {
         this._portfolio = [];
     }
     add(stock) {
-        // window.alert("add called")
+
         this._portfolio.push(stock);
-        // window.alert("stock pushed");
-        // this.publish("New stock added", this);
+
     }
     remove(stockID) {
-        window.alert("remove called");
         this._portfolio.splice(stockID,1);
     }
 
