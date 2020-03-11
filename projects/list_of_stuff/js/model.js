@@ -1,5 +1,8 @@
 /* jshint esversion: 8 */
 /* jshint node: true */
+/*jshint jquery: true */
+/* jshint browser: true */
+
 'use strict';
 
 class Stock {
@@ -48,9 +51,9 @@ class Stock {
 
 } 
 
-class Portfolio extends Stock {
+class Portfolio {
     constructor(){
-        super();
+     
         this._portfolio = [];
     }
     add(stock) {
@@ -59,9 +62,11 @@ class Portfolio extends Stock {
         // window.alert("stock pushed");
         // this.publish("New stock added", this);
     }
-    view(){
-        return this._portfolio;
+    remove(stockID) {
+        window.alert("remove called");
+        this._portfolio.splice(stockID,1);
     }
+
     [Symbol.iterator]() {
         let idx = -1;
         return {

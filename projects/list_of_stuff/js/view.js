@@ -1,5 +1,6 @@
 /* jshint esversion: 8 */
 /* jshint node: true */
+/*jshint jquery: true */
 /* jshint browser: true */
 'use strict';
 
@@ -37,8 +38,8 @@ class PortfolioView {
             let uniqueID = getUniqueID();
             row.setAttribute("id", uniqueID);
             let tdCheck = document.createElement("td");
-            // let onclick = `checked()`;
-            tdCheck.innerHTML = '<input type="checkbox" onclick = checked()>';
+            tdCheck.innerHTML = '<input type="checkbox" id="b'+uniqueID+'" class="checkbox_check" onclick = checked('+uniqueID+');>';
+
             row.appendChild(tdCheck);
             
 
