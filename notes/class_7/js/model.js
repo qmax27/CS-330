@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 /* jshint esversion: 6 */
+=======
+/* jshint esversion: 8 */
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
 /* jshint node: true */
 'use strict';
 
 class ComputerMouse {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
     constructor(nButtons, cType, color) {
         this._buttons = nButtons;
         this._connection = cType;
@@ -18,7 +25,11 @@ class ComputerMouse {
         return this._connection;
     }
 
+<<<<<<< HEAD
     set connectionType(newValue){
+=======
+    set connectionType(newValue) {
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
         this._connection = newValue;
     }
 
@@ -26,20 +37,35 @@ class ComputerMouse {
         return this._color;
     }
 
+<<<<<<< HEAD
     set color(newColor) {
         this._color = newColor;
     }
 
     paint(newColor){
+=======
+    set color(newValue) {
+        this._color = newValue;
+    }
+
+    paint(newColor) {
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
         this._color = newColor;
     }
 
     toString() {
         return `A ${this._color} ${this._connection} mouse with ${this._buttons} buttons`;
+<<<<<<< HEAD
    }
 }
 
 class Subject{
+=======
+    }
+}
+
+class Subject {
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
     constructor() {
         this.handlers = [];
     }
@@ -52,7 +78,11 @@ class Subject{
         this.handlers = this.handlers.filter(item => item != func);
     }
 
+<<<<<<< HEAD
     publish(msg, obj){
+=======
+    publish(msg, obj) {
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
         let scope = obj || window;
         for (let f of this.handlers) {
             f(scope, msg);
@@ -60,9 +90,13 @@ class Subject{
     }
 }
 
+<<<<<<< HEAD
 
 class Lab extends Subject{
 
+=======
+class Lab extends Subject {
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
     constructor(theSize) {
         super();
         this._size = theSize;
@@ -70,8 +104,12 @@ class Lab extends Subject{
     }
 
     add(mouse) {
+<<<<<<< HEAD
         if (this._lab.lenth < this._size) {
 
+=======
+        if (this._lab.length < this._size) {
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
             this._lab.push(mouse);
             this.publish("New mouse added", this);
         }
@@ -79,11 +117,16 @@ class Lab extends Subject{
 
     [Symbol.iterator]() {
         let idx = -1;
+<<<<<<< HEAD
         return{
+=======
+        return {
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
             next: () => ({value: this._lab[++idx], done: !(idx in this._lab)})
         };
     }
 }
+<<<<<<< HEAD
 
 // let olin202 = new Lab(2);
 // let m1 = new ComputerMouse(1,"wired","black");
@@ -105,3 +148,5 @@ class Lab extends Subject{
 
 
 
+=======
+>>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
