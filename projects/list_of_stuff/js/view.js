@@ -1,5 +1,6 @@
 /* jshint esversion: 8 */
 /* jshint node: true */
+<<<<<<< HEAD
 /*jshint jquery: true */
 /* jshint browser: true */
 'use strict';
@@ -98,3 +99,7 @@ class PortfolioView {
     }
 }
 
+=======
+'use strict';
+
+>>>>>>> cea0dc56332c93aeed7190b701acfdeaba323862

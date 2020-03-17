@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* jshint esversion: 6 */
 /* jshint browser: true */
 /* jshint node: true */
@@ -7,6 +8,8 @@
 
 function populateSelect(selectID, selectItems) {
     let sel = document.querySelector(selectID);
+=======
+>>>>>>> cea0dc56332c93aeed7190b701acfdeaba323862
 /* jshint esversion: 8 */
 /* jshint browser: true */
 /* jshint node: true */
@@ -20,6 +23,7 @@ function populateSelect(selectId, selectItems) {
         opt.value = item;
         opt.innerHTML = item;
         sel.appendChild(opt);
+<<<<<<< HEAD
 
     }
 }
@@ -53,6 +57,8 @@ function clearAll() {
 function loadCars(){
     let garage = JSON.parse(localStorage.getItem("garage"));
     let allCars = document.querySelector("#garage");
+=======
+>>>>>>> cea0dc56332c93aeed7190b701acfdeaba323862
     }
 }
 
@@ -87,6 +93,7 @@ function loadCars() {
         let aCar = document.createElement("div");
         aCar.classList = "alert alert-primary";
 <<<<<<< HEAD
+<<<<<<< HEAD
         aCar.innerHTML = `${car.make} ${car.model} ${car.year}`;
         allCars.appendChild(aCar);
     }
@@ -103,6 +110,8 @@ $(document).ready(function(){
 
 
 =======
+=======
+>>>>>>> cea0dc56332c93aeed7190b701acfdeaba323862
         aCar.innerHTML = `${car.make} ${car.model} (${car.year})`;
         allCars.appendChild(aCar);
     }
@@ -114,5 +123,9 @@ $(document).ready(function(){
     populateSelect("#sel_model", ["Tacoma", "Taurus", "Cobalt"]);
     populateSelect("#sel_year", [2021, 2020, 2019, 2018]);
     loadCars();
+<<<<<<< HEAD
 });
 >>>>>>> 75dee29cdddd062c0752fb4386b9cd183ca26fd9
+=======
+});
+>>>>>>> cea0dc56332c93aeed7190b701acfdeaba323862
