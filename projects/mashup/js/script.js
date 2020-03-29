@@ -242,8 +242,8 @@ function populateSelect(selectID, sList){
 }
 
 window.onload = function() {
-    loadInvestment();
     populateSelect("#country", countries);
     populateSelect("#currency", currencies);
+    loadInvestment();
 
 };
