@@ -200,6 +200,9 @@ function saveInvestment(){
 
 function loadInvestment(){
     let investment = JSON.parse(localStorage.getItem("exchange"));
+    if (!investment){
+        return;
+    }
     let cm = document.getElementById("cm");
     cm.innerHTML = investment["cm"];
     let pd = document.getElementById("pd");
@@ -229,7 +232,6 @@ function clearInvestment() {
 
 }
 
-
 function populateSelect(selectID, sList){
     let comp = document.querySelector(selectID);
     for (const optionVal of sList) {
@@ -238,7 +240,6 @@ function populateSelect(selectID, sList){
         newOption.innerHTML = optionVal;
         comp.appendChild(newOption);
     }
-
 }
 
 window.onload = function() {
