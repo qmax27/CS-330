@@ -22,7 +22,7 @@ async function analyzeInvestment(){
         let warning = document.createElement("p");
         warning.setAttribute("class", "alert alert-danger alert-dismissible");
         warning.setAttribute("id", "warningMessage");
-        warning.innerHTML ="Please correctly enter all of the values before adding analyzing investment";
+        warning.innerHTML ="Please correctly enter all of the values before analyzing investment. Note: dates must be within the last 4 years due to limitations with the API.";
         let body = document.querySelector("#errorSpace");
         body.appendChild(warning);
         return;
@@ -73,22 +73,24 @@ async function analyzeInvestment(){
     if (sDate == ""){
         sDate = new Date();
         sDate.setDate(sDate.getDate() -1);
-        console.log(sDate);
         sDate = sDate.getFullYear()+'-'+(sDate.getMonth()+1)+'-'+sDate.getDate();
     }
     let initialExchange = await getRateChange(pDate, oldCurrency, newCurrency);
     initialExchange = initialExchange*iEquity;
     let finalExchange = await getRateChange(sDate, newCurrency, oldCurrency);
     let equityChange = await getIndexChange(pDate, sDate, index);
+    let type = (typeof equityChange);
+    if ((typeof equityChange)=="string"){
+        let warning = document.createElement("p");
+        warning.setAttribute("class", "alert alert-danger alert-dismissible");
+        warning.setAttribute("id", "warningMessage");
+        warning.innerHTML = equityChange;
+        let body = document.querySelector("#errorSpace");
+        body.appendChild(warning);
+        return;
+    }
     let finalToExchange = equityChange*initialExchange;
     let fEquity = finalToExchange*finalExchange;
-    console.log("Initial: "+iEquity)
-    console.log("Initial Exchanged: "+initialExchange);
-    console.log("Final to Exchange: "+finalToExchange);
-    console.log("Final: "+ fEquity);
-
-    console.log("EC: "+(fEquity-iEquity));
-    console.log("EC%: "+(((fEquity-iEquity)/(iEquity))*100)+"%");
     let beforeEx = (((finalToExchange-initialExchange)/initialExchange)*100).toFixed(2);
     let afterEx = (((fEquity-iEquity)/iEquity)*100).toFixed(2);
     let exImpact = (afterEx-beforeEx).toFixed(2);
@@ -102,8 +104,6 @@ async function analyzeInvestment(){
     if (exImpact > 0){
         exImpact = "+"+exImpact;
     }
-
-   
 
     let cm = document.getElementById("cm");
     cm.innerHTML = country;
@@ -129,24 +129,11 @@ async function analyzeInvestment(){
 }
 
 async function getRateChange(date, oldCurrency, newCurrency){
-    // https://api.exchangeratesapi.io/2019-03-24?symbols=EUR&base=USD
     let URL = "https://api.exchangeratesapi.io/"+date+"?symbols="+newCurrency+"&base="+oldCurrency;
     let RateData = await getData(URL);
-    console.log(RateData);
     RateData = JSON.parse(RateData);
     let rates = RateData["rates"];
     let exchangeMultiplier = rates[newCurrency];
-    console.log(exchangeMultiplier);
-
-    // let finalURL = "https://api.exchangeratesapi.io/"+sDate+"?symbols="+newCurrency+"&base="+oldCurrency;
-    // RateData = await getData(finalURL);
-    // console.log(RateData);
-    // RateData = JSON.parse(RateData);
-    // rates = RateData["rates"];
-    // let final = rates[newCurrency];
-    // console.log(final);
-    // let rateChange = final/initial;
-    // console.log(rateChange);
 
     return exchangeMultiplier;
 
@@ -154,22 +141,27 @@ async function getRateChange(date, oldCurrency, newCurrency){
 
 async function getIndexChange(pDate, sDate, index){
     let URL = "https://financialmodelingprep.com/api/v3/historical-price-full/index/"+index+"?from="+pDate+"&to="+pDate;
-    console.log(URL);
     let data = await getData(URL);
+    
+    if (data == '{ }'){
+        return "No market data for purchase date, please enter a new one.";
+    }
+
     data = JSON.parse(data);
     data = data["historical"];
     data = data[0];
     let initialEquity = data["open"];
-
     URL = "https://financialmodelingprep.com/api/v3/historical-price-full/index/"+index+"?from="+sDate+"&to="+sDate;
     data = await getData(URL);
+    if (data == '{ }'){
+        return "No market data for sale date, please enter a new one.";
+    }
     data = JSON.parse(data);
     data = data["historical"];
     data = data[0];
     let endingEquity = data["open"];
     let equityChange = endingEquity/initialEquity;
 
-    console.log("Change: "+ equityChange);
     return equityChange;
 }
 
@@ -230,6 +222,12 @@ function loadInvestment(){
     ae.innerHTML = investment["ae"];
 }
 
+function clearInvestment() {
+    let currentEx = {"cm":"", "pd":"", "sd":"", "ie":"", "iee":"", "eee":"", "ee":"", "be":"", "ei":"", "ae":""};
+    localStorage.setItem("exchange",JSON.stringify(currentEx));
+    loadInvestment();
+
+}
 
 
 function populateSelect(selectID, sList){

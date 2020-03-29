@@ -13,14 +13,14 @@
     <form id="form" class="form-group">
         <table class = "table text-center">
             <thead>
-                <th>Country Index</th><th>Home currency</th><th>Amount of home currency originally invested</th><th>Purchase Date</th><th>Sale Date (leave blank for today)</th>
+                <th>Foreign index to invest in</th><th>Home currency</th><th>Amount of home currency originally invested</th><th>Purchase Date</th><th>Sale Date (leave blank for yesterday)</th>
             </thead>
             <tr>
                 <td><select name="country" id="country" class="btn dropdown-toggle" required></select></td>
                 <td><select name="currency" id="currency" class="btn dropdown-toggle" required></select></td>
                 <td><input type="number" min="0" value="1000" id="initialEquity" name="initialEquity"required></td>
                 <td><input type="date" min="2016-01-01" value="2019-03-26" id="purchaseDate" name="purchaseDate" required></td>
-                <td><input type="date" min="2016-01-01" id="saleDate" name="saleDate"></td>
+                <td><input type="date" min="2016-01-01" max="2020-3-31" id="saleDate" name="saleDate"></td>
             </tr>
         </table>
     </form>
