@@ -144,7 +144,7 @@ async function getIndexChange(pDate, sDate, index){
     let data = await getData(URL);
     
     if (data == '{ }'){
-        return "No market data for purchase date, please enter a new one.";
+        return "No market data for purchase date, please enter a new one. Note that markets are not open on weekends or holidays.";
     }
 
     data = JSON.parse(data);
@@ -154,7 +154,7 @@ async function getIndexChange(pDate, sDate, index){
     URL = "https://financialmodelingprep.com/api/v3/historical-price-full/index/"+index+"?from="+sDate+"&to="+sDate;
     data = await getData(URL);
     if (data == '{ }'){
-        return "No market data for sale date, please enter a new one.";
+        return "No market data for sale date, please enter a new one. Note that markets are not open on weekends or holidays.";
     }
     data = JSON.parse(data);
     data = data["historical"];

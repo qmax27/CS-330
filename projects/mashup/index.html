@@ -4,32 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://i.imgur.com/PPP31Jz.png">
+    <script src="https://kit.fontawesome.com/d3bfe630f6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <title>True Return Calculator</title>
 </head>
-<body>
-    <h1 class="h1 bg-info rounded p-2 m-2">True Return Calculator</h1>
-    <p class="p bg-success rounded p-2 m-2">Investing in foreign markets is very complex because changing exchange rates can dramatically impact returns. This tool illustrates this phenomenon.</p>
-    <form id="form" class="form-group">
-        <table class = "table text-center">
+<body id="body" class="m-2">
+    <h1 class="display-1 bg-dark text-white text-center p-2 m-2">True Return Calculator <i class="fas fa-coins"></i></h1>
+    <h4 class="bg-dark text-white p-3 m-2 text-justify">Investing in foreign markets is very complex because changing exchange rates can dramatically impact returns. 
+        This tool is designed to provide investors with an easy way to compare the true historical performance of investments made in six major stock indicies. 
+        To use the tool, simply select which country's stock index you want to invest in, choose your home currency, and specify purchase and sale dates within the last four years.</h4>
+    <form id="form" class="form-group ">
+        <table class = "table text-center table-striped font-weight-bold text-white table-sm table-dark m-2">
             <thead>
-                <th>Foreign index to invest in</th><th>Home currency</th><th>Amount of home currency originally invested</th><th>Purchase Date</th><th>Sale Date (leave blank for yesterday)</th>
+                <th>Foreign index to invest in</th><th>Home currency</th><th>Amount of home currency originally invested</th><th>Purchase Date</th><th>Sale Date</th>
             </thead>
             <tr>
-                <td><select name="country" id="country" class="btn dropdown-toggle" required></select></td>
-                <td><select name="currency" id="currency" class="btn dropdown-toggle" required></select></td>
-                <td><input type="number" min="0" value="1000" id="initialEquity" name="initialEquity"required></td>
-                <td><input type="date" min="2016-01-01" value="2019-03-26" id="purchaseDate" name="purchaseDate" required></td>
-                <td><input type="date" min="2016-01-01" max="2020-3-31" id="saleDate" name="saleDate"></td>
+    <form id="form" class="form-group">
+                <td><select name="country" id="country" class="btn-white dropdown-toggle form-control" required></select></td>
+                <td><select name="currency" id="currency" class="btn-white dropdown-toggle form-control" required></select></td>
+                <td><input type="number" min="0" value="1000" id="initialEquity" name="initialEquity" class="form-control input-lg" required></td>
+                <td><input type="date" class="form-control" min="2016-01-01" value="2019-03-26" id="purchaseDate" name="purchaseDate" required></td>
+                <td><input type="date" class="form-control" min="2016-01-01" max="2020-3-31" id="saleDate" name="saleDate"></td>
             </tr>
         </table>
     </form>
-    <button class="btn-block btn-success rounded m-2 p-2" onclick="analyzeInvestment()">Analyze Investment</button>
+    <button class="btn-block btn-success font-weight-bold rounded m-2 p-2" onclick="analyzeInvestment()">Analyze Investment <i class="fas fa-calculator"></i></button>
 
     <p id="errorSpace">
     </p>
-    <table class="table text-center m-3">
+    <table class="table text-center table-striped font-weight-bold text-white table-sm table-dark m-2">
         <tr><td>Country Index:</td><td id="cm"></td></tr>
         <tr><td>Purchase Date:</td><td id="pd"></td></tr>
         <tr><td>Sale Date:</td><td id="sd"></td></tr>
@@ -40,13 +44,9 @@
         <tr><td>Percent Change before Exchange</td><td id="be"></td></tr>
         <tr><td>Impact of Currency Exchange</td><td id="ei"></td></tr>
         <tr><td>Percent Change after Exchange</td><td id="ae"></td></tr>
-
-
-
-
     </table>
-    <button class="btn-block btn-info rounded m-2 p-2" onclick="saveInvestment()">Save Investment</button>
-    <button class="btn-block btn-danger rounded m-2 p-2" onclick="clearInvestment()">Clear Investment</button>
+    <button class="btn-block btn-info font-weight-bold rounded m-2 p-2" onclick="saveInvestment()">Save Investment <i class="fas fa-save"></i></button>
+    <button class="btn-block btn-danger font-weight-bold rounded m-2 p-2" onclick="clearInvestment()">Clear Investment <i class="fas fa-trash-alt"></i></button>
 
     
 </body>
