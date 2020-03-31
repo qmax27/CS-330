@@ -1,5 +1,14 @@
 #body {
     font-family: sans-serif;
     background-color: whitesmoke;    
-    
 }
+a:link{
+    color: white;
+}
+a:visited{
+    color: white;
+}
+a:hover {
+    color: hotpink;
+  }
+
