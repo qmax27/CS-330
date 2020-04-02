@@ -125,7 +125,6 @@ async function analyzeInvestment(){
     ae.innerHTML = afterEx+" %";
     let ei = document.getElementById("ei");
     ei.innerHTML = exImpact+" %";
-    
 }
 
 async function getRateChange(date, oldCurrency, newCurrency){
@@ -136,7 +135,6 @@ async function getRateChange(date, oldCurrency, newCurrency){
     let exchangeMultiplier = rates[newCurrency];
 
     return exchangeMultiplier;
-
 }
 
 async function getIndexChange(pDate, sDate, index){
@@ -187,15 +185,9 @@ function saveInvestment(){
     let ae = document.getElementById("ae");
     ae = ae.innerHTML;
     
-
-
-    // localStorage.removeItem("exchange");
     let currentEx = {"cm":cm, "pd":pd, "sd":sd, "ie":ie, "iee":iee, "eee":eee, "ee":ee, "be":be, "ei":ei, "ae":ae};
 
-    setTimeout(function() {
-
-        localStorage.setItem("exchange",JSON.stringify(currentEx));
-    },500);
+    localStorage.setItem("exchange",JSON.stringify(currentEx));
 }
 
 function loadInvestment(){
@@ -229,7 +221,6 @@ function clearInvestment() {
     let currentEx = {"cm":"", "pd":"", "sd":"", "ie":"", "iee":"", "eee":"", "ee":"", "be":"", "ei":"", "ae":""};
     localStorage.setItem("exchange",JSON.stringify(currentEx));
     loadInvestment();
-
 }
 
 function populateSelect(selectID, sList){
@@ -246,5 +237,4 @@ window.onload = function() {
     populateSelect("#country", countries);
     populateSelect("#currency", currencies);
     loadInvestment();
-
 };
