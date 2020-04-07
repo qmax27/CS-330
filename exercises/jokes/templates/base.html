@@ -3,9 +3,39 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d3bfe630f6.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <h1 class="display bg-dark rounded text-white text-center m-2 p-2">Joke Generator <i class="far fa-laugh"></i></h1> 
+       <form action="/templates/jokes.html" method="POST" id="userSelection">
+        <table class="container text-center bg-info rounded">
+            <th>Category</th><th>Language</th>
+            <tr>
+                <td>
+                    <select name="cat" id="cat">
+                        {% for cat in category %}
+                            <option name="cat2" id="cat2" value="{{ cat }}">{{ cat }}</option>
+                        {% endfor %}
+                      </select>    
+                </td>
+                <td>
+                    <select name="lang" id="lang">
+                        {% for lang in language %}
+                            <option value="{{ lang }}">{{ lang }}</option>
+                        {% endfor %}
+                      </select>    
+                </td>
+            </tr>
+        </table>
+    <input type="submit" value="Amuse Me!" class="btn-block btn-rounded btn-dark display m-2 p-2">
+
+    </form>
+  
+        {% block content %}  
+
+        {% endblock %}
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
