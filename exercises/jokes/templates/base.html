@@ -1,11 +1,9 @@
 <html>
-
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d3bfe630f6.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
     <h1 class="display bg-dark rounded text-white text-center m-2 p-2">Joke Generator <i class="far fa-laugh"></i></h1> 
        <form action="/templates/jokes.html" method="POST" id="userSelection">
@@ -29,7 +27,6 @@
             </tr>
         </table>
     <input type="submit" value="Amuse Me!" class="btn-block btn-rounded btn-dark display m-2 p-2">
-
     </form>
   
         {% block content %}  
@@ -46,5 +43,4 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

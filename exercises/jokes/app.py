@@ -27,4 +27,3 @@ def getJoke(cat,lang):
     ranNum = int(ranNum*len(jokeList))
     joke = jokeList[ranNum]
     return joke
-
