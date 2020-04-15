@@ -27,10 +27,17 @@ def get_random_joke():
 def get_specific_joke(id):
     
     jokeList = pyjokes.get_jokes(category="all", language="en")
-    joke = jokeList[int(id)]
-    res = Response(json.dumps({id: joke}))
-    res.headers["Access-Control-Allow-Origin"] = "*"
-    res.headers["Content-Type"] = "application/json"
+    try:
+        joke = jokeList[int(id)]
+        res = Response(json.dumps({id: joke}))
+        res.headers["Access-Control-Allow-Origin"] = "*"
+        res.headers["Content-Type"] = "application/json"
+    except:
+        joke = "Sorry! We couldn't find a joke with the ID number "+str(id)
+        res = Response(json.dumps({id: joke}))
+        res.headers["Access-Control-Allow-Origin"] = "*"
+        res.headers["Content-Type"] = "application/json"
+
     return res
 
 if __name__ == "__main__":
