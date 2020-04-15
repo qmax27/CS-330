@@ -4,7 +4,7 @@
 /* jshint jquery: true */
 'use strict';
 
-const BASE_URL = "http://maxqu01.pythonanywhere.com/api/v1"
+const BASE_URL = "https://maxqu01.pythonanywhere.com/api/v1"
 
 async function requestData(typeOfData) {
     return fetch(`${BASE_URL}/${typeOfData}`)
