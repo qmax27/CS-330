@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="bg-success text-white rounded m-4 p-4 text-center">
+    Inventory
+</h1>
+<table id="list" class="table text-center m-4 p-4">
+    <thead>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+    </thead>
+    <tbody>
+        {% for s in inventory %}
+        <tr>
+            <td>{{ s[0] }}</td>
+            <td>{{ s[1] }}</td>
+            <td>{{ s[2] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>    
+
+<h1 id="errorSpace" class="text-center bg-danger">
+    {{ errorMessage }}
+</h1>
+
+{% endblock %}
