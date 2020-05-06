@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mui-container">
+    <h1>Are you sure you want to log out?</h1>
+    <form action="/logout" method="POST">
+        <input type=submit value="Log Out" class="mui-btn mui-btn--danger">
+    </form>
+</div>
+
+{% endblock %}
