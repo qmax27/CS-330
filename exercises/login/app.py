@@ -14,7 +14,7 @@ app.secret_key = SECRET_KEY
 def index():
     if "username" in session:
         message = escape(session["username"])
-        # "Logged in as %s" % escape(session["username"]
+        
         return render_template("index.html", user=message)
     return render_template("login.html")
 
@@ -25,12 +25,6 @@ def login():
         session["username"] = request.form["username"]
         return redirect(url_for("index"))
     return render_template("login.html")
-    # """
-    #     <form method="post">
-    #         <p><input type=text name=username>
-    #         <p><input type=submit value=Login>
-    #     </form>
-    # """
 
 
 @app.route("/logout", methods=["GET", "POST"])
