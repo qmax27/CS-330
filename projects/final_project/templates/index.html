@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="bg-info rounded text-center p-4 m-4">Search for a stock</h1>
+
+<div class="mui-container">
+    <table id="stocks" class="mui-table">
+        <thead>
+            <th>Ticker</th>
+            <th>Company Name</th>
+            <th>Sector</th>
+
+        </thead>
+        <tbody>
+            {% for stock in stockTable %}
+            <tr>
+                <td><a class="text-center" href="/stock">{{ stock.symbol }}</a></td>
+                <td>{{ stock.name }}</td>
+                <td>{{ stock.sector }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#stocks").DataTable();
+    });
+</script>
+
+
+{% endblock %}

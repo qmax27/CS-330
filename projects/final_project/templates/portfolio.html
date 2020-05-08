@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="bg-info rounded text-center p-4 m-4">Your Portfolio</h1>
+<a class="text-center" href="/"><h3>Search for stock</h3></a>
+
+{% for stock in portfolioTable %}
+<tr>
+    <td>{{ stock.symbol }}</td>
+    <td>{{ stock.name }}</td>
+    <td>{{ stock.sector }}</td>
+</tr>
+{% endfor %}
+
+{{ emptyMessage }}
+{% endblock %}
