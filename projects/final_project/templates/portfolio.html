@@ -4,14 +4,31 @@
 
 <h1 class="bg-info rounded text-center p-4 m-4">Your Portfolio</h1>
 <a class="text-center" href="/"><h3>Search for stock</h3></a>
+<table class="table text-center">
+<thead>
+    <th>Ticker</th>
+    <th>Company Name</th>
+    <th>Sector</th>
 
+</thead>
+<tbody>
 {% for stock in portfolioTable %}
+
 <tr>
-    <td>{{ stock.symbol }}</td>
-    <td>{{ stock.name }}</td>
-    <td>{{ stock.sector }}</td>
+    <td>{{ stock[0] }}</td>
+    <td>{{ stock[1] }}</td>
+    <td>{{ stock[2] }}</td>
 </tr>
 {% endfor %}
+</tbody>
+</table>
+<h3 class="text-center">
+    {{ emptyMessage }}
+</h3>
 
-{{ emptyMessage }}
+
+<form class="text-center" action="/portfolio/CLEARALL" method="POST">
+    <input type=submit value="Clear Portfolio" class="btn-danger rounded p-4 m-4 text-center">
+</form>
+
 {% endblock %}

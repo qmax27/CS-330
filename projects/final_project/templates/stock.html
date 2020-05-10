@@ -4,11 +4,14 @@
 
 <a class="text-center" href="/"><h3>Search for stock</h3></a>
 
-<h1>{{ stockName }}</h1>
+<h1 class="text-center">{{ company }}</h1>
+<!-- <img src="{{ imageLink }}"> -->
+<h4 class="text-center">Ticker symbol: {{ symbol }}</h4>
+<h4 class="text-center">Sector: {{ sector }}</h4>
 
-{{ stockInfo }}
 
-<form action="/portfolio" method="POST">
+
+<form class="text-center" action="/portfolio/{{ symbol }}" method="GET">
     <input type=submit value="Add to portfolio" class="btn-success rounded p-4 m-4 text-center">
 </form>
 
