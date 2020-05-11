@@ -3,13 +3,112 @@
 {% block content %}
 
 <a class="text-center" href="/"><h3>Search for stock</h3></a>
-
+<br>
+<div class="text-center">
+    <img class="img-fluid text-center" src="{{ logoURL }}">
+</div>
 <h1 class="text-center">{{ company }}</h1>
-<!-- <img src="{{ imageLink }}"> -->
+<h1 class="text-center m-4 p-4 text-danger"><b><u>{{ error }}</u></b></h1>
+
+
+<div class="row">
+    <div class="col m-4 p-4">
+        <h2><u>About {{ company }}:</u></h2>
+        <p class="">
+            {{ summ }}
+        </p>
+        <br>
+        <h2><u>Contact Info:</u></h2>
+        <p class=" ">
+        {{ address1 }}
+        </p>
+        
+        <p class=" ">
+        {{ address2 }}
+        </p>
+        
+        <p class=" ">
+        {{ address3 }}
+        </p>
+        <br>
+        <div class=" ">
+            <a class=" " href="{{ website }}" target="_blank" >{{ website }}</a> 
+        </div>
+               
+        <p class=" ">
+        {{ phone }}
+        </p>
+    </div>
+
+    <div class="col m-4 p-4">
+        <h2><u>Stock Info:</u></h2>
+        <div class="row">
+            <div class="col">
+                <p class=" ">
+                    Ticker symbol: {{ symbol }}
+                </p>
+                <p class=" ">
+                    Sector: {{ sector }}
+                </p>
+                <p class=" ">
+                    {{ lastPrice }}
+                </p>
+                <p class=" ">
+                    {{ div }}
+                </p>
+                <p class=" ">
+                    {{ h52 }}
+                </p>
+                <p class=" ">
+                    {{ l52 }}
+                </p>
+            </div>
+            <div class="col">
+                <p class=" ">
+                    {{ vol }}
+                </p>
+                <p class=" ">
+                    {{ avol }}
+                </p>
+                <p class=" ">
+                    {{ c52 }}
+                </p>
+                <p class=" ">
+                    {{ s52 }}
+                </p>
+                <p class=" ">
+                    {{ mcap }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- 
+<img src="{{ imageLink }}">
 <h4 class="text-center">Ticker symbol: {{ symbol }}</h4>
 <h4 class="text-center">Sector: {{ sector }}</h4>
 
+</div>
+<div class="float-right m-4 p-4">
+<p class="text-center">
+Current Price: ${{ lastPrice }}
+</p>
 
+<p class="text-center">
+Dividend Yield: {{ div }}%
+</p>
+</div>
+
+
+
+ -->
 
 <form class="text-center" action="/portfolio/{{ symbol }}" method="GET">
     <input type=submit value="Add to portfolio" class="btn-success rounded p-4 m-4 text-center">

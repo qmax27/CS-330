@@ -15,7 +15,7 @@
 {% for stock in portfolioTable %}
 
 <tr>
-    <td>{{ stock[0] }}</td>
+    <td><a class="text-center" href="/stock/{{ stock[0] }}">{{ stock[0] }}</a></td>
     <td>{{ stock[1] }}</td>
     <td>{{ stock[2] }}</td>
 </tr>
