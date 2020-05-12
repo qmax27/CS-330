@@ -9,6 +9,8 @@
     <th>Ticker</th>
     <th>Company Name</th>
     <th>Sector</th>
+    <th>Number of Shares</th>
+
 
 </thead>
 <tbody>
@@ -16,8 +18,11 @@
 
 <tr>
     <td><a class="text-center" href="/stock/{{ stock[0] }}">{{ stock[0] }}</a></td>
-    <td>{{ stock[1] }}</td>
+    <td><a class="text-center" href="/stock/{{ stock[0] }}">{{ stock[1] }}</a></td>
     <td>{{ stock[2] }}</td>
+    <td>{{ stock[3] }}</td>
+
+
 </tr>
 {% endfor %}
 </tbody>
@@ -27,7 +32,7 @@
 </h3>
 
 
-<form class="text-center" action="/portfolio/CLEARALL" method="POST">
+<form class="text-center" action="/portfolio/CLEARALL" method="GET">
     <input type=submit value="Clear Portfolio" class="btn-danger rounded p-4 m-4 text-center">
 </form>
 

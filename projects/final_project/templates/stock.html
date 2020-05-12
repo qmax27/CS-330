@@ -8,11 +8,10 @@
     <img class="img-fluid text-center" src="{{ logoURL }}">
 </div>
 <h1 class="text-center">{{ company }}</h1>
-<h1 class="text-center m-4 p-4 text-danger"><b><u>{{ error }}</u></b></h1>
-
+{{ error }}
 
 <div class="row">
-    <div class="col m-4 p-4">
+    <div class="col m-3 p-3">
         <h2><u>About {{ company }}:</u></h2>
         <p class="">
             {{ summ }}
@@ -40,42 +39,64 @@
         </p>
     </div>
 
-    <div class="col m-4 p-4">
+    <div class="col m-3 p-3">
         <h2><u>Stock Info:</u></h2>
         <div class="row">
             <div class="col">
                 <p class=" ">
                     Ticker symbol: {{ symbol }}
                 </p>
+                <br>
                 <p class=" ">
                     Sector: {{ sector }}
                 </p>
+                <br>
                 <p class=" ">
                     {{ lastPrice }}
                 </p>
+                <br>
                 <p class=" ">
                     {{ div }}
                 </p>
+                <br>
                 <p class=" ">
                     {{ h52 }}
                 </p>
+                <br>
                 <p class=" ">
                     {{ l52 }}
                 </p>
+                <br>
+                <h2><u>Buy Shares:</u></h2>
+                <form id="addShares" class="text-center form-group" action="/portfolio/{{ symbol }}" method="POST">
+                    <table>
+                        <tr>
+                            <td><h2 class="m-1">Number of shares:</h2></td>
+                            <td><input type="number" min="1" step="1" id="shares" name="shares" required></td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Add to portfolio" class="btn-success btn-block rounded p-2 text-center">
+                </form>
+        
+        
             </div>
             <div class="col">
                 <p class=" ">
                     {{ vol }}
                 </p>
+                <br>
                 <p class=" ">
                     {{ avol }}
                 </p>
+                <br>
                 <p class=" ">
                     {{ c52 }}
                 </p>
+                <br>
                 <p class=" ">
                     {{ s52 }}
                 </p>
+                <br>
                 <p class=" ">
                     {{ mcap }}
                 </p>
@@ -84,34 +105,10 @@
 
         </div>
 
-
     </div>
 
 </div>
 
 
-<!-- 
-<img src="{{ imageLink }}">
-<h4 class="text-center">Ticker symbol: {{ symbol }}</h4>
-<h4 class="text-center">Sector: {{ sector }}</h4>
-
-</div>
-<div class="float-right m-4 p-4">
-<p class="text-center">
-Current Price: ${{ lastPrice }}
-</p>
-
-<p class="text-center">
-Dividend Yield: {{ div }}%
-</p>
-</div>
-
-
-
- -->
-
-<form class="text-center" action="/portfolio/{{ symbol }}" method="GET">
-    <input type=submit value="Add to portfolio" class="btn-success rounded p-4 m-4 text-center">
-</form>
 
 {% endblock %}

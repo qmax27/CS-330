@@ -20,7 +20,7 @@
             {% for stock in stockTable %}
             <tr>
                 <td><a class="text-center" href="/stock/{{ stock[0] }}">{{ stock[0] }}</a></td>
-                <td>{{ stock[1] }}</td>
+                <td><a class="text-center" href="/stock/{{ stock[0] }}">{{ stock[1] }}</a></td>
                 <td>{{ stock[2] }}</td>
             </tr>
             {% endfor %}
@@ -28,6 +28,7 @@
     </table>
 </div>
 
+<h1>N: {{ n }}</h1>
 <script>
     $(document).ready(function () {
         $("#stocks").DataTable();
