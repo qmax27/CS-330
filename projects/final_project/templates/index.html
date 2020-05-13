@@ -1,37 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="bg-info rounded text-center p-4 m-4">Search for a stock</h1>
+<h1 class="bg-dark rounded text-center text-white font-weight-bold p-4 m-4">Search for an S&P 500 stock</h1>
 <table class="table text-center">
     <thead>
         <th><a class="text-center" href="/portfolio/VIEWALL">View Your Portfolio</a></th>
     </thead>
 </table>
 
-<div class="mui-container">
-    <table id="stocks" class="table text-center">
-        <thead>
+<div class="m-5 p-5 bg-dark rounded">
+    <div class="bg-white rounded-lg m-3 p-3">
+        
+    <table id="stocks" class="table font-weight-bold text-center rounded border-dark hover stripe">
+        <thead >
             <th>Ticker</th>
             <th>Company Name</th>
             <th>Sector</th>
 
         </thead>
-        <tbody>
+        <tbody class="table table dark">
             {% for stock in stockTable %}
-            <tr>
-                <td><a class="text-center" href="/stock/{{ stock[0] }}">{{ stock[0] }}</a></td>
-                <td><a class="text-center" href="/stock/{{ stock[0] }}">{{ stock[1] }}</a></td>
-                <td>{{ stock[2] }}</td>
+            <tr class="table-row">
+                <td><a class="font-weight-bold h4" href="/stock/{{ stock[0] }}">{{ stock[0] }}</a></td>
+                <td><a class="font-weight-bold h4" href="/stock/{{ stock[0] }}">{{ stock[1] }}</a></td>
+                <td class="font-weight-bold h4">{{ stock[2] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+</div>
 
-<h1>N: {{ n }}</h1>
 <script>
     $(document).ready(function () {
         $("#stocks").DataTable();
+     
     });
 </script>
 

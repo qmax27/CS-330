@@ -1,6 +1,8 @@
 import requests
 from flask import Flask, request, render_template, send_from_directory, Markup
 from flask import redirect, url_for
+from flask import Flask, Response, jsonify
+from flask_cors import CORS, cross_origin
 import csv, sqlite3
 import sys, json
 import yfinance as yf
@@ -33,13 +35,23 @@ def portfolio(symbol):
     global portfolioList
     global p
     if request.method == "GET":
-        try:
-            p.execute('''DROP TABLE portfolio''')
-        except:
-            pass
+        if symbol == "CLEARALL":
+            try:
+                p.execute('''DROP TABLE portfolio''')
+            except:
+                pass
+            portfolioTable = []
+            emptyMessage = "Your portfolio is currently empty!"
+            return render_template("portfolio.html", portfolioTable=portfolioTable, emptyMessage=emptyMessage)
         portfolioTable = []
-        emptyMessage = "Your portfolio is currently empty!"
+        emptyMessage = ""
+        try:
+            for row in p.execute('SELECT * FROM portfolio'):
+                portfolioTable.append(row)
+        except:
+            emptyMessage = "Your portfolio is currently empty!"
         return render_template("portfolio.html", portfolioTable=portfolioTable, emptyMessage=emptyMessage)
+
 
 
     
@@ -90,24 +102,29 @@ def getStockInfo(symbol):
         date = data[date]
         price = date["1. open"]
         orderedP.insert(0, float(price))
-    # dates = list(dict.fromkeys(dates))
-    max = len(dates)-1
-    labels = []
-    for num in range(max, 0, -5):
-        labels.insert(0,dates[num])
-    
+    color = "limegreen"
+    if orderedP[0]>orderedP[len(orderedP)-1]:
+        color = "orangered"
+    min = str(dates[0])
+    max = str(dates.pop())
+    # return max
+    # return str(labels)
+    plt.style.use('dark_background')
+    plt.rc('font', size=13)   
+
+
     fig = Figure()
     ax = fig.subplots()
-    ax.plot(dates, orderedP)
+    ax.plot(orderedP, color=color, linewidth=2)
     ax.set_ylabel("Stock Price ($)")
-    ax.set_xlabel(labels)
+    ax.set_xlabel("Years "+min+" - "+max)
+
+    ax.set_xticklabels([])
     buf = BytesIO()
     fig.savefig(buf, format="png")
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
-    image = f"<img src='data:image/png;base64,{data}'/>"
-    return image
-
-
+    Gimage = f"<img src='data:image/png;base64,{data}'/>"
+    Gimage = Markup(Gimage)
    
     exString = "SELECT company, sector FROM stockTable WHERE symbol ='"+symbol+"'"
     for row in s.execute(exString):
@@ -141,8 +158,8 @@ def getStockInfo(symbol):
             div = 'Dividend Yield: '+str(round((stockData.get("dividendYield")*100),2))+'%'
         except:
             div = "Dividend Yield: 0.00%"
-        h52 = "52 week high: "+str(stockData.get("fiftyTwoWeekHigh"))
-        l52 = "52 week low: "+str(stockData.get("fiftyTwoWeekLow"))
+        h52 = "52 week high: $"+str(round(stockData.get("fiftyTwoWeekHigh"),2))
+        l52 = "52 week low: $"+str(round(stockData.get("fiftyTwoWeekLow"),2))
         vol = "Today's Volume: "+str(place_value(int(stockData.get("volume"))))
         avol = "Average Volume: "+str(place_value(int(stockData.get("averageVolume"))))
         c52 = '52 week change: '+str(round((stockData.get("52WeekChange")*100),2))+'%'
@@ -151,7 +168,7 @@ def getStockInfo(symbol):
         error = ""
         return render_template("stock.html", company=company[0], symbol=symbol, sector=company[1], logoURL=logoURL, address1=address1, \
             address2=address2, address3=address3, website=website, phone=phone, lastPrice=lastPrice, div=div, summ=summ, error=error, \
-                h52=h52, l52=l52, vol=vol, avol=avol, c52=c52, s52=s52, mcap=mcap)
+                h52=h52, l52=l52, vol=vol, avol=avol, c52=c52, s52=s52, mcap=mcap, Gimage=Gimage)
     except:
         error=Markup('''<h1 class="text-center m-4 p-4 text-danger"><b><u>There is no information available for this company</u></b></h1>''')
 
@@ -171,10 +188,34 @@ def getStockInfo(symbol):
         c52 = ""
         s52 = ""
         mcap ="" 
+        Gimage = ""
 
         return render_template("stock.html", company=company[0], symbol=symbol, sector=company[1], logoURL=logoURL, address1=address1, \
             address2=address2, address3=address3, website=website, phone=phone, lastPrice=lastPrice, div=div, summ=summ, error=error, \
-                h52=h52, l52=l52, vol=vol, avol=avol, c52=c52, s52=s52, mcap=mcap)
+                h52=h52, l52=l52, vol=vol, avol=avol, c52=c52, s52=s52, mcap=mcap, Gimage=Gimage)
 def place_value(number): 
     return ("{:,}".format(number)) 
+
+@app.route("/api/<symbol>")
+def getInfo(symbol):
+   
+    yourStock = yf.Ticker(symbol)
+    try:
+        info = yourStock.info
+    
+        info = [info.get("bid"), info.get("ask"), info.get("volume")]
+       
+        res = Response(json.dumps(info))
+        res.headers["Access-Control-Allow-Origin"] = "*"
+        res.headers["Content-Type"] = "application/json"
+    except:
+        info = "Sorry! We couldn't find information for a stock with the ticker symbol "+str(symbol)
+        res = Response(json.dumps({symbol: info}))
+        res.headers["Access-Control-Allow-Origin"] = "*"
+        res.headers["Content-Type"] = "application/json"
+
+    return res
+
+if __name__ == "__main__":
+    app.run("0.0.0.0")
 

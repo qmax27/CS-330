@@ -2,109 +2,119 @@
 
 {% block content %}
 
-<a class="text-center" href="/"><h3>Search for stock</h3></a>
-<br>
-<div class="text-center">
-    <img class="img-fluid text-center" src="{{ logoURL }}">
-</div>
-<h1 class="text-center">{{ company }}</h1>
-{{ error }}
+<table class="table text-center bg-white font-weight-bold">
+<tr class="">
+    <td><a class="text-right" href="/"><h3>Search for stock</h3></a></td>
+    <td><a class="text-left" href="/portfolio/VIEWALL"><h3>View my portfolio</h3></a></td>
 
-<div class="row">
-    <div class="col m-3 p-3">
+</tr>
+</table>
+{{ error }}
+<div class="row m-2 p-2 ">
+    <div class="col m-3 p-3 bg-dark rounded-lg text-center text-white border border-success">
+        <div class="p-2 bg-dark rounded text-center text-white">
+
+            <div class="text-center">
+                <img class="img-fluid text-center bg-white p-2" src="{{ logoURL }}">
+            </div>
         <h2><u>About {{ company }}:</u></h2>
-        <p class="">
+        <h4 class="text-left">
             {{ summ }}
-        </p>
-        <br>
-        <h2><u>Contact Info:</u></h2>
-        <p class=" ">
-        {{ address1 }}
-        </p>
-        
-        <p class=" ">
-        {{ address2 }}
-        </p>
-        
-        <p class=" ">
-        {{ address3 }}
-        </p>
-        <br>
-        <div class=" ">
-            <a class=" " href="{{ website }}" target="_blank" >{{ website }}</a> 
+        </h4>
         </div>
-               
-        <p class=" ">
-        {{ phone }}
-        </p>
+
+        <div class="row">
+            <div class="col m-2 p-2 text-white bg-dark rounded text-center">
+
+            <h2><u>Contact Info:</u></h2>
+            <h4 class=" ">
+            {{ address1 }}
+            </h4>
+            
+            <h4 class=" ">
+            {{ address2 }}
+            </h4>
+            
+            <h4 class=" ">
+            {{ address3 }}
+            </h4>
+            <br>
+            <div class=" ">
+                <a class="text-white" href="{{ website }}" target="_blank" ><h4><u>{{ website }}</u></h4></a> 
+            </div>
+                   
+            <h4 class=" ">
+            {{ phone }}
+            </h4>
+            </div>
+            <div class="col m-2 p-2 bg-dark text-white rounded text-center">
+                <h2><u>Buy Shares:</u></h2>
+                <form id="addShares" class="text-center form-group" action="/portfolio/{{ symbol }}" method="POST">
+                    <table>
+                        <tr>
+                            <td><h2 class="m-1">Number of shares:</h2></td>
+                            <td><input class="form-control" type="number" min="1" step="1" id="shares" name="shares" required></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <input type="submit" value="Add to portfolio" class="btn-success btn-block rounded-lg p-2 text-center font-weight-bold h1">
+                </form>
+            </div>
+        </div>
+        <div>
+
+        </div>
+
     </div>
 
-    <div class="col m-3 p-3">
+    <div class="col m-3 p-3 bg-dark rounded-lg text-center text-white border border-success font-weight-bold">
         <h2><u>Stock Info:</u></h2>
         <div class="row">
             <div class="col">
                 <p class=" ">
                     Ticker symbol: {{ symbol }}
                 </p>
-                <br>
                 <p class=" ">
                     Sector: {{ sector }}
                 </p>
-                <br>
                 <p class=" ">
                     {{ lastPrice }}
                 </p>
-                <br>
                 <p class=" ">
                     {{ div }}
                 </p>
-                <br>
                 <p class=" ">
                     {{ h52 }}
                 </p>
-                <br>
                 <p class=" ">
                     {{ l52 }}
                 </p>
-                <br>
-                <h2><u>Buy Shares:</u></h2>
-                <form id="addShares" class="text-center form-group" action="/portfolio/{{ symbol }}" method="POST">
-                    <table>
-                        <tr>
-                            <td><h2 class="m-1">Number of shares:</h2></td>
-                            <td><input type="number" min="1" step="1" id="shares" name="shares" required></td>
-                        </tr>
-                    </table>
-                    <input type="submit" value="Add to portfolio" class="btn-success btn-block rounded p-2 text-center">
-                </form>
-        
+               
+       
         
             </div>
             <div class="col">
                 <p class=" ">
                     {{ vol }}
                 </p>
-                <br>
                 <p class=" ">
                     {{ avol }}
                 </p>
-                <br>
                 <p class=" ">
                     {{ c52 }}
                 </p>
-                <br>
                 <p class=" ">
                     {{ s52 }}
                 </p>
-                <br>
                 <p class=" ">
                     {{ mcap }}
                 </p>
 
             </div>
-
+           
         </div>
 
+        {{ Gimage }}
     </div>
 
 </div>

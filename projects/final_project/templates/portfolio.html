@@ -2,27 +2,25 @@
 
 {% block content %}
 
-<h1 class="bg-info rounded text-center p-4 m-4">Your Portfolio</h1>
-<a class="text-center" href="/"><h3>Search for stock</h3></a>
-<table class="table text-center">
-<thead>
+<h1 class="bg-dark rounded text-white font-weight-bold text-center p-4 m-4">Your Portfolio</h1>
+<a class="text-center" href="/"><h3>Search for a stock</h3></a>
+<div class="rounded m-4 p-4">
+
+<table class="table font-weight-bold table-bordered table-hover table-dark table-striped text-center rounded">
+<thead class="thead-dark">
     <th>Ticker</th>
     <th>Company Name</th>
     <th>Sector</th>
     <th>Number of Shares</th>
-
-
 </thead>
 <tbody>
 {% for stock in portfolioTable %}
 
 <tr>
-    <td><a class="text-center" href="/stock/{{ stock[0] }}">{{ stock[0] }}</a></td>
-    <td><a class="text-center" href="/stock/{{ stock[0] }}">{{ stock[1] }}</a></td>
-    <td>{{ stock[2] }}</td>
-    <td>{{ stock[3] }}</td>
-
-
+    <td><a class="text-center h2" href="/stock/{{ stock[0] }}">{{ stock[0] }}</a></td>
+    <td><a class="text-center h2" href="/stock/{{ stock[0] }}">{{ stock[1] }}</a></td>
+    <td class="h2">{{ stock[2] }}</td>
+    <td class="h2">{{ stock[3] }}</td>
 </tr>
 {% endfor %}
 </tbody>
@@ -33,7 +31,7 @@
 
 
 <form class="text-center" action="/portfolio/CLEARALL" method="GET">
-    <input type=submit value="Clear Portfolio" class="btn-danger rounded p-4 m-4 text-center">
+    <input type=submit value="Clear Portfolio" class="btn-danger font-weight-bold rounded h3 p-4 m-4 text-center">
 </form>
-
+</div>
 {% endblock %}
