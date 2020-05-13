@@ -10,12 +10,16 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 import base64
 from io import BytesIO
+import os.path
 
 
 app = Flask(__name__)
-stockList = sqlite3.connect('stockTable.DB', check_same_thread=False)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sdb_path = os.path.join(BASE_DIR, "stockTable.DB")
+pdb_path = os.path.join(BASE_DIR, "port.DB")
+stockList = sqlite3.connect(sdb_path, check_same_thread=False)
 s = stockList.cursor()
-portfolioList = sqlite3.connect('port.DB', check_same_thread=False)
+portfolioList = sqlite3.connect(pdb_path, check_same_thread=False)
 p = portfolioList.cursor()
 
 
@@ -94,43 +98,44 @@ def getStockInfo(symbol):
     URL = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol="+symbol+"&apikey=UG7FF5GH6WHAI2QB"
     data = requests.get(URL)
     data = data.json()
-    data =  data["Monthly Time Series"]
-    orderedP = []
-    dates = []
-    for date in data:
-        dates.insert(0, int(date[0:4]))
-        date = data[date]
-        price = date["1. open"]
-        orderedP.insert(0, float(price))
-    color = "limegreen"
-    if orderedP[0]>orderedP[len(orderedP)-1]:
-        color = "orangered"
-    min = str(dates[0])
-    max = str(dates.pop())
-    # return max
-    # return str(labels)
-    plt.style.use('dark_background')
-    plt.rc('font', size=13)   
-
-
-    fig = Figure()
-    ax = fig.subplots()
-    ax.plot(orderedP, color=color, linewidth=2)
-    ax.set_ylabel("Stock Price ($)")
-    ax.set_xlabel("Years "+min+" - "+max)
-
-    ax.set_xticklabels([])
-    buf = BytesIO()
-    fig.savefig(buf, format="png")
-    data = base64.b64encode(buf.getbuffer()).decode("ascii")
-    Gimage = f"<img src='data:image/png;base64,{data}'/>"
-    Gimage = Markup(Gimage)
-   
-    exString = "SELECT company, sector FROM stockTable WHERE symbol ='"+symbol+"'"
-    for row in s.execute(exString):
-        company = row 
-    yourStock = yf.Ticker(symbol)
     try:
+        data =  data["Monthly Time Series"]
+        orderedP = []
+        dates = []
+        for date in data:
+            dates.insert(0, int(date[0:4]))
+            date = data[date]
+            price = date["1. open"]
+            orderedP.insert(0, float(price))
+        color = "limegreen"
+        if orderedP[0]>orderedP[len(orderedP)-1]:
+            color = "orangered"
+        min = str(dates[0])
+        max = str(dates.pop())
+        # return max
+        # return str(labels)
+        plt.style.use('dark_background')
+        plt.rc('font', size=13)   
+
+
+        fig = Figure()
+        ax = fig.subplots()
+        ax.plot(orderedP, color=color, linewidth=2)
+        ax.set_ylabel("Stock Price ($)")
+        ax.set_xlabel("Years "+min+" - "+max)
+
+        ax.set_xticklabels([])
+        buf = BytesIO()
+        fig.savefig(buf, format="png")
+        data = base64.b64encode(buf.getbuffer()).decode("ascii")
+        Gimage = f"<img src='data:image/png;base64,{data}'/>"
+        Gimage = Markup(Gimage)
+    
+        exString = "SELECT company, sector FROM stockTable WHERE symbol ='"+symbol+"'"
+        for row in s.execute(exString):
+            company = row 
+        yourStock = yf.Ticker(symbol)
+    
         stockData = yourStock.info
         # return stockData
         
