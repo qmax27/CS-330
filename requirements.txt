@@ -5,7 +5,7 @@ attrs==19.1.0
 backports.csv==1.0.7
 beautifulsoup4==4.8.1
 black==19.3b0
-certifi==2019.3.9
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 defusedxml==0.6.0
